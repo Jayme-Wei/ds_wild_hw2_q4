@@ -68,14 +68,16 @@ st.write(f"The first year when the average temperature exceeds 55°F is {first_y
 
 # Create the line chart of yearly average temperature
 fig = px.line(yearly_avg, x='Year', y='Ftemp', title='Yearly Average Temperature (°F)', 
-              labels={'Ftemp': 'Average Temperature (°F)', 'Year': 'Year'})
-
-# Add a horizontal red line at 55°F
-fig.add_hline(y=55, line_dash="dash", line_color="red", annotation_text="55°F", annotation_position="top right")
+              labels={'Ftemp': 'Average Temperature (°F)', 'Year': 'Year'},
+              line_shape="linear")
 
 # Add 5-year moving average line
 fig.add_scatter(x=yearly_avg['Year'], y=yearly_avg['5-Year Avg'], mode='lines', 
                 name='5-Year Avg', line=dict(color='blue', dash='dot'))
+
+# Add a horizontal red line at 55°F
+fig.add_hline(y=55, line_dash="dash", line_color="red", 
+              annotation_text="55°F", annotation_position="top right")
 
 # Annotate the 5-year average line
 fig.add_annotation(x=yearly_avg['Year'].max(), 
@@ -86,6 +88,7 @@ fig.add_annotation(x=yearly_avg['Year'].max(),
                    ax=30, 
                    ay=-30, 
                    font=dict(color="blue"))
+
 # Show the figure in the Streamlit app
 st.plotly_chart(fig)
 

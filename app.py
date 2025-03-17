@@ -45,6 +45,11 @@ fig = px.line(monthly_avg, x='Month', y='Ftemp',
 # Show the plot in the Streamlit app
 st.plotly_chart(fig)
 
+st.write("""
+    This is a monthly average temperature display from 1950 to 2021. By sliding the bar above, you
+    could choose the year you want to view. We do see that the yearly patterns are very similar, with 
+    temperature peak around July and August.
+""")
 
 # Part B: First Year with Average Temperature Above 55°F
 st.header("Part B: First Year with Average Temperature Above 55°F")

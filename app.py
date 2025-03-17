@@ -8,7 +8,7 @@ import numpy as np
 @st.cache
 def load_data():
     # Replace this with the actual path to your CSV file or load the dataset accordingly
-    df = pd.read_csv('/Users/yewei/Desktop/gradschool/25S/DS wild/hw2/p4-data/weather.csv')
+    df = pd.read_csv('weather.csv')
 
     # Convert 'time' to datetime
     df['time'] = pd.to_datetime(df['time'])

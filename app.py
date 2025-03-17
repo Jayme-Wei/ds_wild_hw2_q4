@@ -188,6 +188,8 @@ st.write("""
     accuracy.
 """)
 
+st.subheader("Assessing Model Accuracy")
+
 # Calculate accuracy metrics
 mae = mean_absolute_error(actual_all, forecast)  # Compare actual and forecasted for 36 months
 rmse = np.sqrt(mean_squared_error(actual_all, forecast))

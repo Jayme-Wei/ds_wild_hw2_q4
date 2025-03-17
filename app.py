@@ -82,7 +82,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error
 # Assuming 'df' is your DataFrame already loaded with the weather data
 
 # Time-Series Forecasting with SARIMA
-st.header("Part C-1: Time-Series Prediction of Average Temperature with SARIMA")
+st.header("Part C: Time-Series Prediction of Average Temperature with SARIMA")
 
 # Convert the 'time' column to datetime if it's not already
 df['time'] = pd.to_datetime(df['time'])
@@ -95,6 +95,11 @@ monthly_avg = df.groupby('YearMonth')['Ftemp'].mean()
 
 # SARIMA Model
 st.subheader("Fitting SARIMA Model")
+
+st.write("""
+    We will run a time series analysis to analyze and predict future temperature around Cornell Tech.
+    Since there is seasonality in this data, we will use SARIMA instead of ARIMA.
+""")
 
 # Define SARIMA model (p, d, q) and (P, D, Q, S)
 # We use (p=1, d=1, q=1) for non-seasonal and (P=1, D=1, Q=1, S=12) for seasonal (12 months in a year)
@@ -178,7 +183,9 @@ st.plotly_chart(fig_comparison)
 st.write("""
     This chart shows the comparison between the **actual temperatures** for 2022, 2023, and 2024 
     and the **forecasted temperatures** using the SARIMA model. The close-up chart below gives a more focused view 
-    of how the predicted temperatures align with the actual ones throughout the year.
+    of how the predicted temperatures align with the actual ones throughout the year. Based on this validation,
+    the model seems to fit closely with actual data. Now, we calculate some statistics to evaluate its
+    accuracy.
 """)
 
 # Calculate accuracy metrics
@@ -189,10 +196,11 @@ st.write(f"Mean Absolute Error (MAE): {mae:.2f}°F")
 st.write(f"Root Mean Squared Error (RMSE): {rmse:.2f}°F")
 
 st.write("""
-       The Mean Absolute Error (MAE) of 2.19°F and Root Mean Squared Error (RMSE) of 2.67°F 
+       The Mean Absolute Error (MAE) of **2.19°F** and Root Mean Squared Error (RMSE) of **2.67°F** 
        indicate that the SARIMA model is doing a good job in forecasting the temperature for 
        the next 36 months. These are relatively low error values, suggesting that the forecasted 
-       temperatures are close to the actual ones.
+       temperatures are close to the actual ones. Thus, we could go from here and further predict 2025
+       monthly tempature.
        """)
 # Add this data to the historical data
 actual_dates = pd.date_range('2022-01-01', periods=36, freq='M')
@@ -273,3 +281,6 @@ forecast_table = pd.DataFrame({
 # Display the table
 st.subheader("2025 Monthly Forecasted Temperatures")
 st.write(forecast_table)
+st.write("""
+        Here we have the predicted 2025 monthly temprature.
+""")
